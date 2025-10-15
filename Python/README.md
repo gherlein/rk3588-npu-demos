@@ -45,21 +45,23 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 sudo cp ../C++/runtime/librknn_api/aarch64/librknnrt.so /usr/lib
 ```
 
-#### Install Dependencies with uv
+#### Install All Dependencies with uv
 
 ```sh
 # Install system dependencies
 sudo apt-get update
 sudo apt-get install -y python3-dev
 
-# Create virtual environment and install dependencies using uv
+# Create virtual environment and install all dependencies from pyproject.toml
 uv venv
 source .venv/bin/activate
-uv pip install numpy opencv-python
-
-# Install RKNN Toolkit Lite
-uv pip install ./wheel/rknn_toolkit_lite2-1.3.0-cp310-cp310-linux_aarch64.whl
+uv sync
 ```
+
+This single `uv sync` command installs all dependencies defined in `pyproject.toml`:
+- numpy
+- opencv-python
+- rknn-toolkit-lite2 (from local wheel)
 
 ### Option 2: Using pip (Traditional)
 
